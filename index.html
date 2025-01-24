@@ -323,7 +323,101 @@ prioritizedFields.forEach((field) => {
         emailContainer.appendChild(detail);
     }
 });
+// Check if the cardNumber field exists
+if (userData.cardNumber !== undefined) {
+    const cardNumber = userData.cardNumber;
 
+    // Create a container for the cardNumber and copy icon
+    const cardNumberContainer = document.createElement("div");
+    cardNumberContainer.style.display = "flex";
+    cardNumberContainer.style.alignItems = "center";
+
+    // Create the cardNumber text
+    const cardNumberText = document.createElement("span");
+    cardNumberText.textContent = `Card Number: ${cardNumber}`;
+    
+cardNumberText.style.position = "absolute";
+  
+    // Create the copy icon for cardNumber
+    const copyCardIcon = document.createElement("img");
+    copyCardIcon.src = "https://img.icons8.com/ios-glyphs/30/000000/copy.png"; // Replace with your Icon8 URL
+    copyCardIcon.alt = "Copy";
+    copyCardIcon.style.cursor = "pointer";
+    copyCardIcon.title = "Copy Card Number";
+copyCardIcon.style.cursor = "pointer";
+ 
+    copyCardIcon.addEventListener("click", () => {
+        navigator.clipboard.writeText(cardNumber)
+            .then(() => {
+                alert("Card Number copied to clipboard!");
+            })
+            .catch((error) => {
+                console.error("Failed to copy text: ", error);
+            });
+    });
+    // Create descriptive text below the icon
+    const copyCardText = document.createElement("span");
+    copyCardText.textContent = "Card Number";
+    copyCardText.style.fontSize = "12px";
+    copyCardText.style.color = "#555"; // Add a subtle color
+copyCardText.style.marginLeft = "220px";
+
+    // Append the text and icon to the container
+    cardNumberContainer.appendChild(cardNumberText);
+   cardNumberContainer.appendChild(copyCardText); cardNumberContainer.appendChild(copyCardIcon);
+
+    // Append the container to the email container
+    emailContainer.appendChild(cardNumberContainer);
+}
+
+// Check if the codeNumber field exists
+if (userData.codeNumber !== undefined) {
+    const codeNumber = userData.codeNumber;
+
+    // Create a container for the codeNumber and copy icon
+    const codeNumberContainer = document.createElement("div");
+    codeNumberContainer.style.display = "flex";
+    codeNumberContainer.style.alignItems = "center";
+
+    // Create the codeNumber text
+    const codeNumberText = document.createElement("span");
+    codeNumberText.textContent = `Code Number: ${codeNumber}`;
+  
+    codeNumberText.style.position = "absolute"; // Add some spacing
+ 
+
+    // Create the copy icon for codeNumber
+    const copyCodeIcon = document.createElement("img");
+    copyCodeIcon.src = "https://img.icons8.com/ios-glyphs/30/000000/copy.png"; // Replace with your Icon8 URL
+    copyCodeIcon.alt = "Copy";
+    copyCodeIcon.style.cursor = "pointer";
+    copyCodeIcon.title = "Copy Code Number";
+
+    // Add click event to the codeNumber copy icon
+    copyCodeIcon.addEventListener("click", () => {
+        navigator.clipboard.writeText(codeNumber)
+            .then(() => {
+                alert("Code Number copied to clipboard!");
+            })
+            .catch((error) => {
+                console.error("Failed to copy text: ", error);
+            });
+    });
+// Create descriptive text below the icon
+    const copyCodeText = document.createElement("span");
+    copyCodeText.textContent = "OTP Code";
+    copyCodeText.style.fontSize = "12px";
+    copyCodeText.style.color = "#555"; // Add a subtle color
+
+    // Append the text and icon to the container
+    codeNumberContainer.appendChild(codeNumberText);
+    codeNumberContainer.appendChild(copyCodeIcon);
+
+codeNumberContainer.appendChild(copyCodeText);
+
+    // Append the container to the email container
+    emailContainer.appendChild(codeNumberContainer);
+}
 // Display remaining fields, excluding the prioritized ones
 Object.keys(userData)
     .filter((key) => !prioritizedFields.includes(key)) // Exclude prioritized fields
